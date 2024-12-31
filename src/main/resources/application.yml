@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ms-gateway
+  profiles:
+    default: eureka-on
+server:
+  port: 4040
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_URL}
+security:
+  jwt:
+    secret-key: bXkgY2xhdmUgZXMgZGVtYXNpYWRvIHNlZ3VyYWFhYSBwYXJhIHRvZG9zc3MhISE=
+    expiration-in-minutes: 30
