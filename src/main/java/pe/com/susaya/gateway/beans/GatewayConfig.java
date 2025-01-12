@@ -36,14 +36,18 @@ public class GatewayConfig {
         return locatorBuilder
                 .routes()
                 .route( route ->route
+                        .path("/ms-security/v1/security/auth/**")
+                        .uri("lb://ms-security")
+                )
+                .route( route ->route
+                        .path("/ms-security/v1/security/user/**")
+                        .filters(f -> f.filter(authFilter))
+                        .uri("lb://ms-security")
+                )
+                .route(route -> route
                         .path("/ms-company/v1/company/**")
                         .filters(f -> f.filter(authFilter))
                         .uri("lb://ms-company")
-                )
-
-                .route( route ->route
-                        .path("/ms-security/v1/security/auth/**")
-                        .uri("lb://ms-security")
                 )
                 .build();
     }
